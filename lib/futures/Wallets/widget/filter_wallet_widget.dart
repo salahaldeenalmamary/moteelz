@@ -117,7 +117,7 @@ class _FilterWalletSheetState extends State<FilterWalletSheet> {
           child: Text('السعر', style: Theme.of(context).textTheme.titleMedium),
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _buildChip('${_minPrice.round()} س.ر'),
             _buildChip('${_maxPrice.round()} س.ر'),

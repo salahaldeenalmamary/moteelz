@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:moteelz/data/models/wallets.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../widget/custom_image_view.dart'; // For date formatting
+import '../../../widget/custom_image_view.dart'; 
 
 class WalletCard extends StatelessWidget {
   final Wallets wallet;
@@ -18,7 +18,7 @@ class WalletCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final textScale = MediaQuery.textScalerOf(context).scale(14);
+ 
 
     return InkWell(
       child: Card(
@@ -33,14 +33,22 @@ class WalletCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: CustomImageView(
+                  fit: BoxFit.contain,
                   imagePath: wallet.walletImage,
                 ),
               ),
+
               SizedBox(
                 height: 6,
               ),
-              _buildDaysPackages(theme),
-
+                   _buildDaysPackages(theme),
+ Text(
+         wallet.name,
+          style: theme.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+          
               // Features List
               _buildFeaturesList(theme),
               const SizedBox(height: 16),
@@ -116,12 +124,7 @@ class WalletCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "المميزات",
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+      
         ...wallet.featuresFavorites.map((feature) {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 4),
@@ -256,7 +259,7 @@ class WalletCardShimmer extends StatelessWidget {
               ),
             ),
 
-            // Price Section Shimmer
+          
             Shimmer.fromColors(
               baseColor: Colors.grey.shade300,
               highlightColor: Colors.grey.shade100,

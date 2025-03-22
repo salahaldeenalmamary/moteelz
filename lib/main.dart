@@ -1,4 +1,4 @@
-
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -36,7 +36,18 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [
         Locale('ar'), // Arabic
       ],
- 
+ scrollBehavior: const MaterialScrollBehavior().copyWith(
+            scrollbars: true,
+            
+            overscroll: false,
+
+            dragDevices: {
+              PointerDeviceKind.mouse,
+              PointerDeviceKind.touch,
+              PointerDeviceKind.stylus,
+              PointerDeviceKind.unknown
+            },
+          ),
       debugShowCheckedModeBanner: false,
 
       builder: (context, child) {

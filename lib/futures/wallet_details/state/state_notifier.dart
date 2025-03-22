@@ -2,6 +2,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/repositories/remote_data_source.dart';
+import '../model/payment_details.dart';
 import 'state_state.dart';
 
 class WalletDetailsNotifier extends StateNotifier<WalletDetailsState> {

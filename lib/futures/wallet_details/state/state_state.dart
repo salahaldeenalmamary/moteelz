@@ -52,38 +52,11 @@ class WalletDetailsState {
   }
 
   double get taxAmount {
-    final price = walletDetails.value?.price;
+    
     final taxPercent = walletDetails.value?.taxPercent;
 
-    if (price == null || taxPercent == null || taxPercent <= 0) return 0.0;
+    if (taxPercent == null || taxPercent <= 0) return 0.0;
 
-    return price / taxPercent;
+    return (total / taxPercent) ;
   }
-}
-
-class PaymentDetails {
-  final String cardHolderName;
-  final String cardNumber;
-  final String expiryDate;
-  final String cvc;
-  final int? walletId;
-  final String? selectedNumbersDay;
-
-  const PaymentDetails({
-    required this.cardHolderName,
-    required this.cardNumber,
-    required this.expiryDate,
-    required this.cvc,
-    this.walletId,
-    this.selectedNumbersDay,
-  });
-
-  Map<String, dynamic> toJson() => {
-        'card_holder_name': cardHolderName,
-        'card_number': cardNumber,
-        'expiry_date': expiryDate,
-        'cvc': cvc,
-        'wallet_id': walletId,
-        'selected_numbers_day': selectedNumbersDay,
-      };
 }

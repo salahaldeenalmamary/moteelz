@@ -23,6 +23,7 @@ class ApiEndpoints {
     queryParameters: queryParams,
   ).toString();
 }
+
   static String walletDetails(int walletId) => 
     '$baseUrl/wallet/details/$walletId';
 }

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobkit_dashed_border/mobkit_dashed_border.dart';
 
-import '../state/order_amount_model.dart';
+import '../model/order_amount_model.dart';
 
 class OrderDetailsAmountsSection extends StatelessWidget {
   final OrderAmountDetails amountDetails;

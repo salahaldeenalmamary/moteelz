@@ -8,7 +8,8 @@ import 'package:moteelz/futures/wallet_details/widget/description_wallet_details
 import 'package:moteelz/futures/wallet_details/widget/wallet_details_card_features.dart';
 import 'package:moteelz/routes/route_manager.dart';
 import '../../data/models/wallet_details.dart';
-import 'state/order_amount_model.dart';
+import 'model/order_amount_model.dart';
+import 'model/payment_details.dart';
 import 'payment_form/payment_form.dart';
 import 'payment_form/payment_form_provider.dart';
 import 'state/state_notifier.dart';
@@ -161,6 +162,7 @@ class WalletDetailsScreen extends ConsumerWidget {
             DescriptionWalletDetailsCardFeatures(
               description: details.description,
             ),
+            const SizedBox(height: 16),
             WalletDetailsCardFeatures(
               featuresFavorites: details.featuresFavorites,
             ),
@@ -205,6 +207,7 @@ class WalletDetailsScreen extends ConsumerWidget {
           OrderDetailsAmountsSection(
             amountDetails: OrderAmountDetails(
                 subtotal: state.total,
+                currencySymbol: state.walletDetails.value?.currency??'SAR',
                 tax: state.taxAmount,
                 discount: state.discountAmount),
           ),
