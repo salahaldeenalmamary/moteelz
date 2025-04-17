@@ -92,7 +92,7 @@ class PaymentForm extends StatelessWidget {
   }
 
   Widget _buildExpiryAndCvcFields(PaymentFormState state,
-      PaymentFormNotifier notifier, ThemeData theme, BuildContext context) {
+      PaymentFormViewModel notifier, ThemeData theme, BuildContext context) {
     return Row(
       children: [
         Expanded(
