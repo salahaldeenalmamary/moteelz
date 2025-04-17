@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:moteelz/core/extensions/context_extensions.dart';
+import 'package:moteelz/core/extensions/widget_extensions.dart';
 
 class DiscountCodeSection extends StatefulWidget {
   final Function(String) onApplyDiscount;
@@ -20,14 +22,14 @@ class _DiscountCodeSectionState extends State<DiscountCodeSection> {
 
     return
     
-     CupertinoListSection.insetGrouped(
-      topMargin: 1,
-      backgroundColor: theme.scaffoldBackgroundColor,
-      margin: EdgeInsets.zero,
-      header:  Text('هل لديك كود خصم', style: theme.textTheme.titleMedium?.copyWith(
-          
-        ),),
+     Column( 
+      crossAxisAlignment: CrossAxisAlignment.start,
+      
       children: [
+        Text('هل لديك كود خصم', style: theme.textTheme.titleMedium?.copyWith(
+          
+        ),).paddingAll(10),
+        
         Form(
           key: _formKey,
           child: Row(
@@ -67,7 +69,7 @@ class _DiscountCodeSectionState extends State<DiscountCodeSection> {
           ),
         ),
       ],
-    );
+    ).paddingAll(10).decorated(color: context.theme.cardColor);
   }
 
   @override

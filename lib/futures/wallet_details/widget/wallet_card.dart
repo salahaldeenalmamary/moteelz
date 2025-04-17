@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:moteelz/futures/wallet_details/widget/description_wallet_details_card_features.dart';
-import 'package:moteelz/futures/wallet_details/widget/discount_code_section.dart';
+import 'package:moteelz/core/extensions/context_extensions.dart';
+import 'package:moteelz/core/extensions/widget_extensions.dart';
 import '../../../data/models/wallet_details.dart';
 import '../../../widget/custom_image_view.dart';
 
@@ -31,7 +31,7 @@ final NumberOfDays? selectedNumberOfDay;
         CustomImageView(
           height: 90,
           width: 140,
-          margin: EdgeInsets.zero,
+          margin: EdgeInsets.only(left: 10),
           radius: BorderRadius.circular(20),
           imagePath: wallet.walletImage,
           fit: BoxFit.fill,
@@ -40,6 +40,7 @@ final NumberOfDays? selectedNumberOfDay;
 
         Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 10,
@@ -86,7 +87,7 @@ if(selectedNumberOfDay!=null)
               ),
             )
       ],
-    ),);
+    ),).paddingAll(10).decorated(color: context.theme.cardColor);
   }
 
   

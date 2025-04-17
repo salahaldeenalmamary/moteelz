@@ -1,11 +1,10 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moteelz/core/network/exceptions/network_exception.dart';
+import 'package:signals/signals_flutter.dart';
 
-import '../network/exceptions/network_exception.dart';
-extension AsyncValueUI<T> on AsyncValue<T> {
+
+extension AsyncStateUI<T> on AsyncState<T> {
   Widget buildWith({
     required Widget Function(T data) dataBuilder,
     Widget Function()? loadingBuilder,
@@ -15,17 +14,19 @@ extension AsyncValueUI<T> on AsyncValue<T> {
     bool skipLoadingOnRefresh = true,
     bool skipError = false,
     VoidCallback? onRetry, 
+    Widget Function()? reloading,
+    Widget Function()? refreshing
   }) {
-    return when(
+    return map(
+      
       loading: () => loadingBuilder?.call() ?? _defaultLoading(),
       error: (error, stack) => errorBuilder?.call(error, stack) ??
           _defaultError(error, onRetry: onRetry), 
       data: (data) {
         return dataBuilder(data);
       },
-      skipLoadingOnReload: skipLoadingOnReload,
-      skipLoadingOnRefresh: skipLoadingOnRefresh,
-      skipError: skipError,
+     refreshing: refreshing, 
+     reloading: reloading
     );
   }
 

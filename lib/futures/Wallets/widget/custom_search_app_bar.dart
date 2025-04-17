@@ -1,10 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
-
-class CustomSearchAppBar extends ConsumerStatefulWidget implements PreferredSizeWidget {
+class CustomSearchAppBar extends StatefulWidget implements PreferredSizeWidget {
   final VoidCallback? onFilterPressed;
   final ValueChanged<String>? onSearchChanged;
   final String hintText;
@@ -21,13 +18,14 @@ class CustomSearchAppBar extends ConsumerStatefulWidget implements PreferredSize
   });
 
   @override
-  ConsumerState<CustomSearchAppBar> createState() => _CustomSearchAppBarState();
+  State<CustomSearchAppBar> createState() => _CustomSearchAppBarState();
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
-class _CustomSearchAppBarState extends ConsumerState<CustomSearchAppBar> {
+class _CustomSearchAppBarState extends State<CustomSearchAppBar> {
+  @override
   late final TextEditingController _searchController;
   Timer? _debounceTimer;
 
@@ -35,14 +33,11 @@ class _CustomSearchAppBarState extends ConsumerState<CustomSearchAppBar> {
   void initState() {
     super.initState();
     _searchController = TextEditingController();
-   
   }
-
- 
 
   void _clearSearch() {
     _searchController.clear();
-   
+
     widget.onSearchChanged?.call('');
   }
 
@@ -55,8 +50,6 @@ class _CustomSearchAppBarState extends ConsumerState<CustomSearchAppBar> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return AppBar(
       backgroundColor: widget.backgroundColor ?? Theme.of(context).cardColor,
       elevation: widget.elevation,
@@ -69,14 +62,11 @@ class _CustomSearchAppBarState extends ConsumerState<CustomSearchAppBar> {
         ),
         child: TextField(
           controller: _searchController,
-     
           decoration: InputDecoration(
             hintText: widget.hintText,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.grey.shade300,
-                width: 0.3),
-            ),
+            border: _buildBorder(Colors.grey.withOpacity(.25)),
+            enabledBorder: _buildBorder(Colors.grey.withOpacity(.25)),
+            focusedBorder: _buildBorder(Colors.grey.withOpacity(.25)),
             prefixIcon: const Icon(Icons.search),
             suffixIcon: _searchController.text.isNotEmpty
                 ? IconButton(
@@ -86,11 +76,17 @@ class _CustomSearchAppBarState extends ConsumerState<CustomSearchAppBar> {
                 : null,
           ),
           onSubmitted: (value) {
-        
             widget.onSearchChanged?.call(value);
           },
         ),
       ),
+    );
+  }
+
+  OutlineInputBorder _buildBorder(Color color) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(color: color, width: 1),
     );
   }
 }

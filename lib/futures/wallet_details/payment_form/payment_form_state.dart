@@ -4,7 +4,7 @@ class PaymentFormState {
   final String cardNumber;
   final String expiryDate;
   final String cvc;
-  final FormStatus formStatus;
+
  final bool isSubmitted;
   const PaymentFormState({
     this.cardName = '',
@@ -12,7 +12,7 @@ class PaymentFormState {
     this.isSubmitted=false,
     this.expiryDate = '',
     this.cvc = '',
-    this.formStatus = FormStatus.initial,
+   
   });
 
   bool get isValid => 
@@ -58,7 +58,7 @@ class PaymentFormState {
     String? cardNumber,
     String? expiryDate,
     String? cvc,
-    FormStatus? formStatus,
+   
     bool? isSubmitted,
   }) {
     return PaymentFormState(
@@ -67,10 +67,9 @@ class PaymentFormState {
       cardNumber: cardNumber ?? this.cardNumber,
       expiryDate: expiryDate ?? this.expiryDate,
       cvc: cvc ?? this.cvc,
-      formStatus: formStatus ?? this.formStatus,
+    
     );
   }
    
 }
 
-enum FormStatus { initial, validating, valid, invalid }

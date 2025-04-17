@@ -1,6 +1,6 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moteelz/data/models/wallets.dart';
 
+import 'package:moteelz/data/models/wallets.dart';
+import 'package:signals/signals.dart';
 import '../../../data/models/filter_country.dart';
 class WalletFilter {
   final String? name;
@@ -47,18 +47,18 @@ class WalletFilter {
 
 // Updated State
 class WalletsState {
-  final AsyncValue<List<Wallets>> wallets;
+  final AsyncState<List<Wallets>> wallets;
   final WalletFilter filter;
   final List<FilterCountry> countries;
 
   const WalletsState({
-    this.wallets = const AsyncLoading(),
+    this.wallets = const AsyncLoading(isLoading: false),
     this.filter = const WalletFilter(),
     this.countries = const [],
   });
 
   WalletsState copyWith({
-    AsyncValue<List<Wallets>>? wallets,
+    AsyncState<List<Wallets>>? wallets,
     WalletFilter? filter,
     List<FilterCountry>? countries,
   }) {

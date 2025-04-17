@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:moteelz/futures/Wallets/state/Wallets_state.dart';
 
 import '../../../data/models/filter_country.dart';
+import '../viewModel/Wallets_state.dart';
 
 class FilterWalletSheet extends StatefulWidget {
   final WalletFilter currentFilter;

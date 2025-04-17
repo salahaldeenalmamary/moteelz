@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void dispose() {
-    // Cancel any ongoing timers when widget is disposed
+   
     super.dispose();
   }
 }

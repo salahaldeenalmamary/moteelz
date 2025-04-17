@@ -1,9 +1,9 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobkit_dashed_border/mobkit_dashed_border.dart';
+import 'package:moteelz/core/extensions/widget_extensions.dart';
 
-import '../model/order_amount_model.dart';
+import '../state/order_amount_model.dart';
 
 class OrderDetailsAmountsSection extends StatelessWidget {
   final OrderAmountDetails amountDetails;
@@ -18,20 +18,21 @@ class OrderDetailsAmountsSection extends StatelessWidget {
     final theme = Theme.of(context);
     final amountItems = amountDetails.getAmountItems();
 
-    return CupertinoListSection(
-      margin: EdgeInsets.zero,
-      backgroundColor: theme.scaffoldBackgroundColor,
-      separatorColor: theme.cardColor,
-      header: Text(
-        'تفاصيل المبلغ',
-        style: theme.textTheme.titleMedium,
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ...amountItems.expand((item) => [
-          if (item.isTotal) _buildDivider(theme),
+        Text(
+          'تفاصيل المبلغ',
+          style: theme.textTheme.titleMedium,
+        ),
+        Column(
+          children: [
+            for (var item in amountItems) ...[
+              if (item.isTotal) _buildDivider(theme),
               _buildAmountRow(context, item),
-              
-            ]),
+            ],
+          ],
+        ).paddingAll(10).decorated(color: theme.cardColor),
       ],
     );
   }

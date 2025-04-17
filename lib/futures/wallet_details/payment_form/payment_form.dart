@@ -1,50 +1,52 @@
 
-import 'package:flutter/cupertino.dart';
+import 'package:context_plus/context_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moteelz/core/extensions/widget_extensions.dart';
+import 'package:signals/signals_flutter.dart';
 
-import 'payment_form_notifier.dart';
+import 'payment_form_view_model.dart';
 import 'payment_form_provider.dart';
 import 'payment_form_state.dart';
 
-class PaymentForm extends ConsumerWidget {
+class PaymentForm extends StatelessWidget {
   const PaymentForm({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(paymentFormProvider);
-    final notifier = ref.read(paymentFormProvider.notifier);
+  Widget build(BuildContext context) {
+    final state = paymentFormRef
+        .of(context).state.watch(context);
+
     final theme = Theme.of(context);
 
-    return 
-    CupertinoFormSection.insetGrouped(
-      
-      backgroundColor: theme.scaffoldBackgroundColor,
-      margin: EdgeInsets.zero,
-      header:  Text('بيانات الدفع', style: theme.textTheme.titleMedium?.copyWith(
-          
-        ),),
-      children: [
-    Form(
-      child: Column(
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        'بيانات الدفع',
+        style: theme.textTheme.titleMedium?.copyWith(),
+      ),
+      SizedBox(
+        height: 8,
+      ),
+      Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           Text('بطاقة الاتمان او الخصم المباشر', style: theme.textTheme.titleSmall?.copyWith(
-          
-        )),
-          _buildCardNameField(state, notifier, theme, context),
+          Text('بطاقة الاتمان او الخصم المباشر',
+              style: theme.textTheme.titleSmall?.copyWith()),
+          _buildCardNameField(
+              state, paymentFormRef.of(context), theme, context),
           const SizedBox(height: 16),
-          _buildCardNumberField(state, notifier, theme, context),
+          _buildCardNumberField(
+              state, paymentFormRef.of(context), theme, context),
           const SizedBox(height: 16),
-          _buildExpiryAndCvcFields(state, notifier, theme, context),
+          _buildExpiryAndCvcFields(
+              state, paymentFormRef.of(context), theme, context),
         ],
-      ),
-    )]);
+      ).paddingAll(10).decorated(color: theme.cardColor)
+    ]);
   }
 
   Widget _buildCardNameField(PaymentFormState state,
-      PaymentFormNotifier notifier, ThemeData theme, BuildContext context) {
+      PaymentFormViewModel notifier, ThemeData theme, BuildContext context) {
     return _buildSection(
       context,
       title: 'اسم صاحب البطاقة',
@@ -63,7 +65,7 @@ class PaymentForm extends ConsumerWidget {
   }
 
   Widget _buildCardNumberField(PaymentFormState state,
-      PaymentFormNotifier notifier, ThemeData theme, BuildContext context) {
+      PaymentFormViewModel notifier, ThemeData theme, BuildContext context) {
     return _buildSection(
       context,
       title: 'رقم البطاقة',
@@ -74,7 +76,9 @@ class PaymentForm extends ConsumerWidget {
           filled: true,
           errorText: state.cardNumberError,
           fillColor: theme.cardColor,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
         ),
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
@@ -160,8 +164,6 @@ class PaymentForm extends ConsumerWidget {
             title,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.bold,
-                  
-                 
                 ),
           ),
         ),
@@ -170,7 +172,6 @@ class PaymentForm extends ConsumerWidget {
     );
   }
 }
-
 
 class CardNumberFormatter extends TextInputFormatter {
   @override

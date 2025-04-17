@@ -37,12 +37,15 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   cached_network_image:
-  flutter_riverpod:
+
   equatable: ^2.0.3
   dio: ^5.5.0
   mobkit_dashed_border: ^0.0.7
   shimmer: ^2.0.0
-
+  context_plus: ^4.1.4
+  signals: ^5.2.2
+  context_watch_signals: ^3.0.4
+  flutter_hooks: ^0.20.5
 dev_dependencies:
   flutter_test:
     sdk: flutter

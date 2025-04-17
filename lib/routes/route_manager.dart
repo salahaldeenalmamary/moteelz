@@ -1,4 +1,4 @@
-// route_manager.dart
+
 import 'package:flutter/material.dart';
 
 import '../futures/Wallets/wallets_screen.dart';
@@ -19,7 +19,7 @@ class RouteManager {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
 
       case walletsRoute:
-        return MaterialPageRoute(builder: (_) => const WalletsScreen());
+        return MaterialPageRoute(builder: (_) =>  WalletsScreen());
       
       case walletDetailsRoute:
         final walletId = settings.arguments as int;

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:moteelz/futures/wallet_details/widget/wallet_card.dart';
+import 'package:moteelz/core/extensions/widget_extensions.dart';
 
 class DescriptionWalletDetailsCardFeatures extends StatefulWidget {
   final String description;
@@ -14,7 +14,6 @@ class DescriptionWalletDetailsCardFeatures extends StatefulWidget {
   State<DescriptionWalletDetailsCardFeatures> createState() =>
       _DescriptionWalletDetailsCardFeaturesState();
 }
-
 
 class _DescriptionWalletDetailsCardFeaturesState
     extends State<DescriptionWalletDetailsCardFeatures> {
@@ -44,19 +43,17 @@ class _DescriptionWalletDetailsCardFeaturesState
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return CupertinoListSection.insetGrouped(
-      backgroundColor: theme.scaffoldBackgroundColor,
-      margin: EdgeInsets.zero,
-      header: 
+    return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+       
+      children: [
         Text(
-          "وصف البطاقة",
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+        "وصف البطاقة",
+        style: theme.textTheme.titleMedium?.copyWith(
+          fontWeight: FontWeight.bold,
         ),
-        
-        children: [
-            LayoutBuilder(
+      ),
+        LayoutBuilder(
           builder: (context, constraints) {
             _checkTextOverflow(constraints.maxWidth);
             return Column(
@@ -87,9 +84,8 @@ class _DescriptionWalletDetailsCardFeaturesState
               ],
             );
           },
-        ),
-    
-        ],
+        ).paddingAll(10).decorated(color: theme.cardColor),
+      ],
     );
   }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:moteelz/core/extensions/context_extensions.dart';
 
 import 'package:moteelz/data/models/wallets.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../widget/custom_image_view.dart'; 
+import '../../../widget/custom_image_view.dart';
 
 class WalletCard extends StatelessWidget {
   final Wallets wallet;
@@ -18,7 +19,6 @@ class WalletCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
- 
 
     return InkWell(
       child: Card(
@@ -29,11 +29,11 @@ class WalletCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header Section
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: CustomImageView(
-                  fit: BoxFit.contain,
+                  width: double.infinity,
+                  height: 170,
                   imagePath: wallet.walletImage,
                 ),
               ),
@@ -41,14 +41,14 @@ class WalletCard extends StatelessWidget {
               SizedBox(
                 height: 6,
               ),
-                   _buildDaysPackages(theme),
- Text(
-         wallet.name,
-          style: theme.textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-          
+              _buildDaysPackages(theme),
+              Text(
+                wallet.name,
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
               // Features List
               _buildFeaturesList(theme),
               const SizedBox(height: 16),
@@ -124,7 +124,6 @@ class WalletCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-      
         ...wallet.featuresFavorites.map((feature) {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 4),
@@ -201,15 +200,17 @@ class WalletCardShimmer extends StatelessWidget {
                   ),
                   Wrap(
                     spacing: 2,
-                    children: List.generate(1, (index) => Container(
-                      width: 70,
-                      height: 24,
-                      margin: const EdgeInsets.only(right: 4),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    )),
+                    children: List.generate(
+                        1,
+                        (index) => Container(
+                              width: 70,
+                              height: 24,
+                              margin: const EdgeInsets.only(right: 4),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            )),
                   ),
                 ],
               ),
@@ -231,35 +232,36 @@ class WalletCardShimmer extends StatelessWidget {
                       borderRadius: borderRadius,
                     ),
                   ),
-                  ...List.generate(6, (index) => Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 16,
-                          height: 16,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Container(
-                          width: 200,
-                          height: elementHeight,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: borderRadius,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
+                  ...List.generate(
+                      6,
+                      (index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 16,
+                                  height: 16,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Container(
+                                  width: 200,
+                                  height: elementHeight,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: borderRadius,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )),
                 ],
               ),
             ),
 
-          
             Shimmer.fromColors(
               baseColor: Colors.grey.shade300,
               highlightColor: Colors.grey.shade100,
